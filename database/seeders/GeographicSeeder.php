@@ -50,7 +50,7 @@ class GeographicSeeder extends Seeder
     {
         return [
             'fid' => $data[0],
-            'geo_shape' => $data[1],
+            'geo_shape' => json_decode($data[1]),
             'call_numero' => $data[2],
             'codigo_postal' => $data[3],
             'colonia_predio' => $data[4],
