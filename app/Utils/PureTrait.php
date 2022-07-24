@@ -20,4 +20,16 @@ trait PureTrait
         }
         return (($save) ? null : '');
     }
+
+    public static function isNumeric($number): bool {
+        return is_numeric($number);
+    }
+
+    public static function isInteger($number): bool {
+        if (!isset($number) || $number == '') {
+            return false;
+        }
+        $regex = '/^\d*$/';
+        return preg_match($regex, $number) == true;
+    }
 }

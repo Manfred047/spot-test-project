@@ -55,6 +55,8 @@ class Geographic extends Model
         'anio_construccion',
         'instalaciones_especiales',
         'valor_unitario_suelo',
+        'valor_suelo',
+        'clave_valor_unitario_suelo',
         'colonia_cumpliemiento',
         'alcaldia_cumplimiento',
         'subsidio'
@@ -76,6 +78,19 @@ class Geographic extends Model
     // SETTERS AND GETTERS
 
     /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function Fid(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isInteger($value) ? null : $value
+        );
+    }
+
+    /**
      * Guardar como JSON.
      *
      * @return Attribute
@@ -85,19 +100,6 @@ class Geographic extends Model
         return Attribute::make(
             get: fn ($value) => $value,
             set: fn ($value) => empty($value) ? null : json_encode($value)
-        );
-    }
-
-    /**
-     * Guardar como default null.
-     *
-     * @return Attribute
-     */
-    protected function Fid(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value,
-            set: fn ($value) => empty($value) ? null : $value
         );
     }
 
@@ -123,7 +125,7 @@ class Geographic extends Model
     {
         return Attribute::make(
             get: fn ($value) => $value,
-            set: fn ($value) => empty($value) ? null : $value
+            set: fn ($value) => !Utils::isInteger($value) ? null : $value
         );
     }
 
@@ -145,11 +147,64 @@ class Geographic extends Model
      *
      * @return Attribute
      */
+    protected function SuperficieTerreno(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isNumeric($value) ? null : $value
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function SuperficieConstruccion(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isNumeric($value) ? null : $value
+        );
+    }
+
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
     protected function UsoConstruccion(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value,
-            set: fn ($value) => empty($value) ? null : $value
+            set: fn ($value) => !Utils::isInteger($value) ? null : $value
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function ClaveRangoNivel(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isInteger($value) ? null : $value
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function AnioConstruccion(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isInteger($value) ? null : $value
         );
     }
 
@@ -163,6 +218,32 @@ class Geographic extends Model
         return Attribute::make(
             get: fn ($value) => $value,
             set: fn ($value) => Utils::trimmed($value, true)
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function ValorUnitarioSuelo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isNumeric($value) ? null : $value
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function ValorSuelo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isNumeric($value) ? null : $value
         );
     }
 
@@ -202,6 +283,19 @@ class Geographic extends Model
         return Attribute::make(
             get: fn ($value) => $value,
             set: fn ($value) => Utils::trimmed($value, true)
+        );
+    }
+
+    /**
+     * Guardar como default null.
+     *
+     * @return Attribute
+     */
+    protected function Subsidio(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => !Utils::isNumeric($value) ? null : $value
         );
     }
 }
