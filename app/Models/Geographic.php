@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Utils\Utils;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -74,6 +75,15 @@ class Geographic extends Model
         return $this->hasOne(ConstructionType::class);
     }
 
+    // SCOPES
+
+    public function scopeZipCode(Builder $builder, int $zipCode) {
+        $builder->where('codigo_postal', $zipCode);
+    }
+
+    public function scopeConstructionUse(Builder $builder, int $constructionType) {
+        $builder->where('uso_construccion', $constructionType);
+    }
 
     // SETTERS AND GETTERS
 
@@ -98,7 +108,7 @@ class Geographic extends Model
     protected function GeoShape(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value,
+            get: fn ($value) => empty($value) ? null : json_decode($value),
             set: fn ($value) => empty($value) ? null : json_encode($value)
         );
     }
